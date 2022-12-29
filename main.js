@@ -1,4 +1,8 @@
 
+$(".ten").click(function() {
+    alert("a");
+});
+
 function numToBrailleLetter(n) {
     let flags = 0;
     flags += (n & 0b00001000) << 3; // ⑦を左シフト
