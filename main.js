@@ -1,4 +1,5 @@
 
+// 右上から右下までの四点 & 左上から左下までの四点
 const pointsBinaryNumber = 0b00000000;
 
 $(".point").click(function() {

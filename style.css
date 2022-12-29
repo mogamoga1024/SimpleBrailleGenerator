@@ -1,5 +1,11 @@
 
 #point-container {
+  display: inline-block;
+  margin-top: 11px;
+  margin-left: 12px;
+}
+
+#point-container > div {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -18,5 +24,15 @@
 
 .black {
   background-color: black;
+}
+
+#result {
+  display: inline-block;
+  height: 210px;
+  margin-left: 24px;
+  vertical-align: top;
+  text-align: center;
+  line-height: 210px;
+  font-size: 180px;
 }
 
