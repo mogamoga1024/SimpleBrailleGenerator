@@ -1,11 +1,19 @@
 
-// 右上から右下までの四点 & 左上から左下までの四点
-const pointsBinaryNumber = 0b11111111;
+// 右下から右上までの四点 & 左下から左上までの四点
+let pointsBinaryNumber = 0b00000000;
 const $result = $("#result");
 
 $(".point").click(function() {
-    $(this).toggleClass("black");
-
+    const $this = $(this);
+    const shiftCount = $this.data("shift-count");
+    if ($this.hasClass("black")) {
+        $this.removeClass("black");
+        pointsBinaryNumber = pointsBinaryNumber - (1 << shiftCount)
+    }
+    else {
+        $this.addClass("black");
+        pointsBinaryNumber = pointsBinaryNumber + (1 << shiftCount)
+    }
     $result.text(numToBrailleLetter(pointsBinaryNumber));
 });
 
