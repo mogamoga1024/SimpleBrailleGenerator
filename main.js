@@ -1,9 +1,12 @@
 
 // 右上から右下までの四点 & 左上から左下までの四点
-const pointsBinaryNumber = 0b00000000;
+const pointsBinaryNumber = 0b00000100;
+const $result = $("#result");
 
 $(".point").click(function() {
     $(this).toggleClass("black");
+
+    $result.text(numToBrailleLetter(pointsBinaryNumber));
 });
 
 // 参考元: https://qiita.com/zakuroishikuro/items/15d1a69178895edf9a21
