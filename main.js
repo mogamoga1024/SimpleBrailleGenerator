@@ -17,6 +17,10 @@ $(".point").click(function() {
     $result.text(numToBrailleLetter(pointsBinaryNumber));
 });
 
+$("button").click(function() {
+    navigator.clipboard.writeText($result.text());
+});
+
 // 参考元: https://qiita.com/zakuroishikuro/items/15d1a69178895edf9a21
 function numToBrailleLetter(n) {
     let flags = 0;
