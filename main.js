@@ -1,8 +1,11 @@
 
-$(".ten").click(function() {
-    alert("a");
+const pointsBinaryNumber = 0b00000000;
+
+$(".point").click(function() {
+    $(this).toggleClass("black");
 });
 
+// 参考元: https://qiita.com/zakuroishikuro/items/15d1a69178895edf9a21
 function numToBrailleLetter(n) {
     let flags = 0;
     flags += (n & 0b00001000) << 3; // ⑦を左シフト

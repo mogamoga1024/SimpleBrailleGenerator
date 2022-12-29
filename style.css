@@ -1,5 +1,5 @@
 
-#ten-container {
+#point-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -8,12 +8,15 @@
   height: 210px;
 }
 
-.ten {
+.point {
   width: 50px;
   height: 50px;
-  /* background-color: black; */
   border-radius: 50%;
   border: 4px solid black;
   box-sizing: border-box;
+}
+
+.black {
+  background-color: black;
 }
 
