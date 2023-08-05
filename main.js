@@ -1,4 +1,6 @@
 
+const allBraille = "⠀⠁⠂⠃⠄⠅⠆⠇⡀⡁⡂⡃⡄⡅⡆⡇⠈⠉⠊⠋⠌⠍⠎⠏⡈⡉⡊⡋⡌⡍⡎⡏⠐⠑⠒⠓⠔⠕⠖⠗⡐⡑⡒⡓⡔⡕⡖⡗⠘⠙⠚⠛⠜⠝⠞⠟⡘⡙⡚⡛⡜⡝⡞⡟⠠⠡⠢⠣⠤⠥⠦⠧⡠⡡⡢⡣⡤⡥⡦⡧⠨⠩⠪⠫⠬⠭⠮⠯⡨⡩⡪⡫⡬⡭⡮⡯⠰⠱⠲⠳⠴⠵⠶⠷⡰⡱⡲⡳⡴⡵⡶⡷⠸⠹⠺⠻⠼⠽⠾⠿⡸⡹⡺⡻⡼⡽⡾⡿⢀⢁⢂⢃⢄⢅⢆⢇⣀⣁⣂⣃⣄⣅⣆⣇⢈⢉⢊⢋⢌⢍⢎⢏⣈⣉⣊⣋⣌⣍⣎⣏⢐⢑⢒⢓⢔⢕⢖⢗⣐⣑⣒⣓⣔⣕⣖⣗⢘⢙⢚⢛⢜⢝⢞⢟⣘⣙⣚⣛⣜⣝⣞⣟⢠⢡⢢⢣⢤⢥⢦⢧⣠⣡⣢⣣⣤⣥⣦⣧⢨⢩⢪⢫⢬⢭⢮⢯⣨⣩⣪⣫⣬⣭⣮⣯⢰⢱⢲⢳⢴⢵⢶⢷⣰⣱⣲⣳⣴⣵⣶⣷⢸⢹⢺⢻⢼⢽⢾⢿⣸⣹⣺⣻⣼⣽⣾⣿";
+
 // 右下から右上までの四点 & 左下から左上までの四点
 let pointsBinaryNumber = 0b00000000;
 const $point = $(".point");
@@ -30,6 +32,23 @@ $("#clear").click(function() {
     $result.text(numToBrailleLetter(pointsBinaryNumber));
 });
 
+$(window).on("paste", function() {
+    navigator.clipboard.readText().then(text => {
+        if (!isBraille(text)) {
+            return;
+        }
+        pointsBinaryNumber = brailleLetterToNum(text);
+        $result.text(numToBrailleLetter(pointsBinaryNumber));
+    });
+});
+
+function isBraille(text) {
+    if (text.length !== 1) {
+        return false;
+    }
+    return allBraille.includes(text);
+}
+
 // 参考元: https://qiita.com/zakuroishikuro/items/15d1a69178895edf9a21
 function numToBrailleLetter(n) {
     let flags = 0;
@@ -38,3 +57,14 @@ function numToBrailleLetter(n) {
     flags += (n & 0b10000111);      // ①②③⑧はそのまま
     return String.fromCodePoint(flags + 0x2800);
 }
+
+function brailleLetterToNum(c){
+    const u = c.codePointAt(0);
+    let flags = 0;
+    flags += (u & 0b01000000) >> 3;
+    flags += (u & 0b00111000) << 1;
+    flags += (u & 0b10000111);
+    return flags;
+}
+
+
