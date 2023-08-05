@@ -1,9 +1,10 @@
 
 // 右下から右上までの四点 & 左下から左上までの四点
 let pointsBinaryNumber = 0b00000000;
+const $point = $(".point");
 const $result = $("#result");
 
-$(".point").click(function() {
+$point.click(function() {
     const $this = $(this);
     const shiftCount = $this.data("shift-count");
     if ($this.hasClass("black")) {
@@ -17,8 +18,16 @@ $(".point").click(function() {
     $result.text(numToBrailleLetter(pointsBinaryNumber));
 });
 
-$("button").click(function() {
+$("#copy").click(function() {
     navigator.clipboard.writeText($result.text());
+});
+
+$("#clear").click(function() {
+    $point.each(function() {
+        $(this).removeClass("black");
+    });
+    pointsBinaryNumber = 0b00000000;
+    $result.text(numToBrailleLetter(pointsBinaryNumber));
 });
 
 // 参考元: https://qiita.com/zakuroishikuro/items/15d1a69178895edf9a21

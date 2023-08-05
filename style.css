@@ -40,7 +40,11 @@ body {
 }
 
 button {
+  display: block;
   width: 262px;
-  margin-top: 18px;
   font-size: 24px;
+}
+
+#copy {
+  margin-top: 18px;
 }
