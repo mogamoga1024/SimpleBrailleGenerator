@@ -39,6 +39,18 @@ $(window).on("paste", function() {
         }
         pointsBinaryNumber = brailleLetterToNum(text);
         $result.text(numToBrailleLetter(pointsBinaryNumber));
+
+        $point.each(function() {
+            const $this = $(this);
+            const shiftCount = $this.data("shift-count");
+            const needPoint = (pointsBinaryNumber & (0b00000001 << shiftCount)) !== 0;
+            if (needPoint) {
+                $this.addClass("black");
+            }
+            else {
+                $this.removeClass("black");
+            }
+        });
     });
 });
 
