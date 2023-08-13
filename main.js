@@ -32,25 +32,25 @@ $("#clear").click(function() {
     $result.text(numToBrailleLetter(pointsBinaryNumber));
 });
 
-$(window).on("paste", function() {
-    navigator.clipboard.readText().then(text => {
-        if (!isBraille(text)) {
-            return;
-        }
-        pointsBinaryNumber = brailleLetterToNum(text);
-        $result.text(numToBrailleLetter(pointsBinaryNumber));
+$(window).on("paste", function(e) {
+    e.preventDefault();
+    const text = e.originalEvent.clipboardData.getData("text");
+    if (!isBraille(text)) {
+        return;
+    }
+    pointsBinaryNumber = brailleLetterToNum(text);
+    $result.text(numToBrailleLetter(pointsBinaryNumber));
 
-        $point.each(function() {
-            const $this = $(this);
-            const shiftCount = $this.data("shift-count");
-            const needPoint = (pointsBinaryNumber & (0b00000001 << shiftCount)) !== 0;
-            if (needPoint) {
-                $this.addClass("black");
-            }
-            else {
-                $this.removeClass("black");
-            }
-        });
+    $point.each(function() {
+        const $this = $(this);
+        const shiftCount = $this.data("shift-count");
+        const needPoint = (pointsBinaryNumber & (0b00000001 << shiftCount)) !== 0;
+        if (needPoint) {
+            $this.addClass("black");
+        }
+        else {
+            $this.removeClass("black");
+        }
     });
 });
 
